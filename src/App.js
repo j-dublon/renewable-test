@@ -4,7 +4,11 @@ import "./App.css";
 function App() {
   return (
     <div className="App">
-      <p>App goes here</p>
+      <img
+        src={require("./images/logo-black.svg")}
+        alt="logo"
+        className="logo"
+      />
     </div>
   );
 }

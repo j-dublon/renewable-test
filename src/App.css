@@ -2,3 +2,13 @@
   text-align: center;
   font-family: "Roboto", sans-serif;
 }
+
+body {
+  background-color: #fbe700;
+}
+
+.logo {
+  display: flex;
+  justify-content: flex-start;
+  padding: 1em;
+}
