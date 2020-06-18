@@ -55,6 +55,10 @@ body {
   margin-left: 0.5em;
 }
 
+.userForm__userCount {
+  margin-top: 1em;
+}
+
 .userCard__container {
   display: flex;
   flex-flow: row wrap;

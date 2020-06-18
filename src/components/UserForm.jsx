@@ -64,6 +64,9 @@ class UserForm extends Component {
           ></input>
           <button className="userForm__submit">Submit</button>
         </form>
+        <h3 className="userForm__userCount">
+          Number of users: {this.state.users.length}
+        </h3>
       </main>
     );
   }
