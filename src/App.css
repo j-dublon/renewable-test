@@ -16,12 +16,19 @@ body {
 .logo {
   display: flex;
   justify-content: flex-start;
-  padding: 1em;
+  padding: 1.5em;
 }
 
 .userForm__form {
   display: flex;
   justify-content: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 6px;
+  box-shadow: 2px 2px 2px #d0ca85;
+  width: 77%;
+  margin: auto;
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
 
 .userForm__label {
@@ -73,4 +80,25 @@ body {
   border: 1px solid #161a1d;
   border-radius: 6px;
   box-shadow: 2px 2px 2px #d0ca85;
+}
+
+@media only screen and (max-width: 600px) {
+  .userForm__form {
+    flex-direction: column;
+    width: 70%;
+  }
+
+  .userForm__label {
+    margin-top: 1em;
+  }
+
+  .userForm__field {
+    margin: 1em;
+    width: 70%;
+    align-self: center;
+  }
+
+  .userForm__submit {
+    margin-block-end: 1em;
+  }
 }
