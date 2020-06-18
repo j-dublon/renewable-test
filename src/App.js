@@ -1,5 +1,6 @@
 import React from "react";
 import "./App.css";
+import UserForm from "./components/UserForm";
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
         alt="logo"
         className="logo"
       />
+      <UserForm />
     </div>
   );
 }
