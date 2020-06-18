@@ -1,10 +1,35 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { fetchUsers } from "../store/fetchUsers";
 import UserCard from "./UserCard";
+import { addUser } from "../store/actions";
 
-class UserForm extends Component {
-  componentDidMount() {}
+export class UserForm extends Component {
+  state = { name: "", email: "", company: "" };
+
+  componentDidMount() {
+    this.props.dispatch(fetchUsers());
+  }
+
+  handleChange(event) {
+    const { value, name } = event.target;
+    this.setState({ [name]: value });
+  }
+
+  handleAddSubmit = (event) => {
+    event.preventDefault();
+    this.props.addUser(this.state);
+    this.setState({ name: "", email: "", company: "" });
+  };
 
   render() {
+    const { error, pending, users } = this.props;
+    if (error) {
+      return <div>Error! {error.message}</div>;
+    }
+    if (pending) {
+      return <div>Loading...</div>;
+    }
     return (
       <main>
         <form className="userForm__form">
@@ -29,38 +54,58 @@ class UserForm extends Component {
           ></input>
         </form>
         <section className="userCard__container">
-          {/* {this.state.users.map((user) => {
+          {users.map((user) => {
             return <UserCard key={user.name} {...user} />;
-          })} */}
+          })}
         </section>
-        <form className="userForm__form">
+        <form
+          className="userForm__form"
+          onSubmit={this.handleAddSubmit.bind(this)}
+        >
           <h2 className="userForm__label">Add new user:</h2>
           <input
             type="text"
-            name="addName"
+            name="name"
+            value={this.state.name}
             placeholder="Name..."
             className="userForm__field"
+            onChange={this.handleChange.bind(this)}
           ></input>
           <input
             type="text"
-            name="addEmail"
+            name="email"
+            value={this.state.email}
             placeholder="Email..."
             className="userForm__field"
+            onChange={this.handleChange.bind(this)}
           ></input>
           <input
             type="text"
-            name="addCompany"
+            name="company"
+            value={this.state.company}
             placeholder="Company..."
             className="userForm__field"
+            onChange={this.handleChange.bind(this)}
           ></input>
           <button className="userForm__submit">Submit</button>
         </form>
-        <h3 className="userForm__userCount">
-          {/* Number of users: {this.state.users.length} */}
-        </h3>
+        <h3 className="userForm__userCount">Number of users: {users.length}</h3>
       </main>
     );
   }
 }
 
-export default UserForm;
+const mapStateToProps = (state) => ({
+  users: state.users,
+  loading: state.pending,
+  error: state.error,
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addUser: (user) => dispatch(addUser(user)),
+    dispatch,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserForm);

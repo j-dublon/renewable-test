@@ -18,33 +18,35 @@ function reducers(state = initialState, action) {
       return {
         ...state,
         pending: true,
+        error: null,
       };
     case FETCH_USERS_SUCCESS:
       return {
         ...state,
         pending: false,
-        users: action.payload,
+        users: action.payload.users,
       };
     case FETCH_USERS_ERROR:
       return {
         ...state,
         pending: false,
-        error: action.error,
+        error: action.payload.error,
       };
     case ADD_USER:
+      console.dir(action);
       return Object.assign({}, state, {
         users: [
           ...state.users,
           {
-            name: action.name,
-            email: action.email,
-            company: action.company,
+            name: action.user.name,
+            email: action.user.email,
+            company: action.user.company,
           },
         ],
       });
     case DELETE_USER:
       return Object.assign({}, state, {
-        users: state.users.filter((user) => user.name !== action.name),
+        users: state.users.filter((user) => user.name !== action.user.name),
       });
     default:
       return state;

@@ -8,28 +8,28 @@ export const FILTER_BY_NAME = "FILTER_BY_NAME";
 export const FILTER_BY_EMAIL = "FILTER_BY_EMAIL";
 export const FILTER_BY_COMPANY = "FILTER_BY_COMPANY";
 
-function fetchUsersPending() {
+export function fetchUsersPending() {
   return {
     type: FETCH_USERS_PENDING,
   };
 }
 
-function fetchUsersSuccess(Users) {
+export function fetchUsersSuccess(users) {
   return {
     type: FETCH_USERS_SUCCESS,
-    users: Users,
+    payload: { users },
   };
 }
 
-function fetchUsersError(error) {
+export function fetchUsersError(error) {
   return {
     type: FETCH_USERS_ERROR,
-    error: error,
+    payload: { error },
   };
 }
 
-export function addUser(text) {
-  return { type: ADD_USER, text };
+export function addUser(user) {
+  return { type: ADD_USER, user };
 }
 
 export function deleteUser(index) {

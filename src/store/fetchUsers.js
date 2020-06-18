@@ -4,22 +4,20 @@ import {
   fetchUsersError,
 } from "./actions";
 
-function fetchUsers() {
+export function fetchUsers() {
   return (dispatch) => {
     dispatch(fetchUsersPending());
-    fetch("https://renewable.exchange/test/users.json")
+    return fetch("https://renewable.exchange/test/users.json")
       .then((res) => res.json())
-      .then((res) => {
-        if (res.error) {
-          throw res.error;
+      .then((json) => {
+        if (json.error) {
+          throw json.error;
         }
-        dispatch(fetchUsersSuccess(res.data));
-        return res.data;
+        dispatch(fetchUsersSuccess(json));
+        return json;
       })
       .catch((error) => {
         dispatch(fetchUsersError(error));
       });
   };
 }
-
-export default fetchUsers;
