@@ -32,8 +32,8 @@ export function addUser(user) {
   return { type: ADD_USER, user };
 }
 
-export function deleteUser(index) {
-  return { type: DELETE_USER, index };
+export function deleteUser(userName) {
+  return { type: DELETE_USER, payload: userName };
 }
 
 export function filterByName() {}

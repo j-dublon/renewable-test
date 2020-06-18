@@ -33,7 +33,6 @@ function reducers(state = initialState, action) {
         error: action.payload.error,
       };
     case ADD_USER:
-      console.dir(action);
       return Object.assign({}, state, {
         users: [
           ...state.users,
@@ -45,8 +44,9 @@ function reducers(state = initialState, action) {
         ],
       });
     case DELETE_USER:
+      console.dir(action);
       return Object.assign({}, state, {
-        users: state.users.filter((user) => user.name !== action.user.name),
+        users: [...state.users.filter((user) => user.name !== action.payload)],
       });
     default:
       return state;

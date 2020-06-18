@@ -57,6 +57,7 @@ body {
 
 .userForm__userCount {
   margin-top: 1em;
+  margin-bottom: 1em;
 }
 
 .userCard__container {
@@ -72,11 +73,13 @@ body {
   border-radius: 6px;
   box-shadow: 5px 5px 5px #d0ca85;
   padding: 0.3em;
+  overflow-wrap: break-word;
 }
 
 .userCard__field {
   margin-bottom: 0.3em;
   color: #161a1d;
+  font-size: 0.9em;
 }
 
 .userCard__delete {
