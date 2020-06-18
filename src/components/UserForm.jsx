@@ -1,17 +1,8 @@
 import React, { Component } from "react";
 import UserCard from "./UserCard";
-import axios from "axios";
 
 class UserForm extends Component {
-  state = {
-    users: [],
-  };
-
-  componentDidMount() {
-    axios.get("https://renewable.exchange/test/users.json").then((response) => {
-      this.setState({ users: response.data });
-    });
-  }
+  componentDidMount() {}
 
   render() {
     return (
@@ -38,9 +29,9 @@ class UserForm extends Component {
           ></input>
         </form>
         <section className="userCard__container">
-          {this.state.users.map((user) => {
+          {/* {this.state.users.map((user) => {
             return <UserCard key={user.name} {...user} />;
-          })}
+          })} */}
         </section>
         <form className="userForm__form">
           <h2 className="userForm__label">Add new user:</h2>
@@ -65,7 +56,7 @@ class UserForm extends Component {
           <button className="userForm__submit">Submit</button>
         </form>
         <h3 className="userForm__userCount">
-          Number of users: {this.state.users.length}
+          {/* Number of users: {this.state.users.length} */}
         </h3>
       </main>
     );
