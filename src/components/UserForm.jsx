@@ -2,7 +2,12 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchUsers } from "../store/fetchUsers";
 import UserCard from "./UserCard";
-import { addUser } from "../store/actions";
+import {
+  addUser,
+  filterByName,
+  filterByEmail,
+  filterByCompany,
+} from "../store/actions";
 
 export class UserForm extends Component {
   state = { name: "", email: "", company: "" };
@@ -11,15 +16,30 @@ export class UserForm extends Component {
     this.props.dispatch(fetchUsers());
   }
 
-  handleChange(event) {
+  handleChange = (event) => {
     const { value, name } = event.target;
     this.setState({ [name]: value });
-  }
+  };
 
   handleAddSubmit = (event) => {
     event.preventDefault();
     this.props.addUser(this.state);
     this.setState({ name: "", email: "", company: "" });
+  };
+
+  filterByName = (event) => {
+    const input = event.target.value;
+    this.props.dispatch(filterByName(input));
+  };
+
+  filterByEmail = (event) => {
+    const input = event.target.value;
+    this.props.dispatch(filterByEmail(input));
+  };
+
+  filterByCompany = (event) => {
+    const input = event.target.value;
+    this.props.dispatch(filterByCompany(input));
   };
 
   render() {
@@ -39,18 +59,21 @@ export class UserForm extends Component {
             name="name"
             placeholder="By name..."
             className="userForm__field"
+            onChange={this.filterByName.bind(this)}
           ></input>
           <input
             type="text"
             name="email"
             placeholder="By email..."
             className="userForm__field"
+            onChange={this.filterByEmail.bind(this)}
           ></input>
           <input
             type="text"
             name="company"
             placeholder="By company..."
             className="userForm__field"
+            onChange={this.filterByCompany.bind(this)}
           ></input>
         </form>
         <section className="userCard__container">
