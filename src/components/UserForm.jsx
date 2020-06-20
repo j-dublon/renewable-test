@@ -2,12 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchUsers } from "../store/fetchUsers";
 import UserCard from "./UserCard";
-import {
-  addUser,
-  filterByName,
-  filterByEmail,
-  filterByCompany,
-} from "../store/actions";
+import { addUser } from "../store/actions";
 
 export class UserForm extends Component {
   state = { name: "", email: "", company: "" };
@@ -25,21 +20,6 @@ export class UserForm extends Component {
     event.preventDefault();
     this.props.addUser(this.state);
     this.setState({ name: "", email: "", company: "" });
-  };
-
-  filterByName = (event) => {
-    const input = event.target.value;
-    this.props.dispatch(filterByName(input));
-  };
-
-  filterByEmail = (event) => {
-    const input = event.target.value;
-    this.props.dispatch(filterByEmail(input));
-  };
-
-  filterByCompany = (event) => {
-    const input = event.target.value;
-    this.props.dispatch(filterByCompany(input));
   };
 
   render() {

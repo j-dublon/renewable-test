@@ -6,9 +6,9 @@ export const UserCard = (props) => {
   const { name, email, company } = props;
   return (
     <div className="userCard">
-      <h3 className="userCard__field">{name}</h3>
-      <p className="userCard__field">{email}</p>
-      <p className="userCard__field">{company}</p>
+      <h3 className="userCard__name">{name}</h3>
+      <p className="userCard__email">{email}</p>
+      <p className="userCard__company">{company}</p>
       <button
         className="userCard__delete"
         onClick={() => props.deleteUser(props.name)}
