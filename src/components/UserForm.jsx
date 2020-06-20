@@ -19,7 +19,7 @@ export class UserForm extends Component {
   handleAddSubmit = (event) => {
     event.preventDefault();
     this.props.addUser(this.state);
-    this.setState({ name: "", email: "", company: "" });
+    this.setState({ name: "", email: "", company: "", filteredUsers: [] });
   };
 
   handleFilter = (event) => {
@@ -31,7 +31,7 @@ export class UserForm extends Component {
     });
     this.setState({ filteredUsers: filtered });
   };
-  
+
   render() {
     const { error, pending, users } = this.props;
     const { filteredUsers } = this.state;
@@ -43,7 +43,7 @@ export class UserForm extends Component {
     }
     return (
       <main>
-        <form className="userForm__form">
+        <form className="userForm">
           <h2 className="userForm__label">Filter users:</h2>
           <input
             type="text"
@@ -76,10 +76,7 @@ export class UserForm extends Component {
                 return <UserCard key={index} {...user} />;
               })}
         </section>
-        <form
-          className="userForm__form"
-          onSubmit={this.handleAddSubmit.bind(this)}
-        >
+        <form className="userForm" onSubmit={this.handleAddSubmit.bind(this)}>
           <h2 className="userForm__label">Add new user:</h2>
           <input
             type="text"
