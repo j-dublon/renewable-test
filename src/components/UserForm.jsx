@@ -2,15 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchUsers } from "../store/fetchUsers";
 import UserCard from "./UserCard";
-import {
-  addUser,
-  filterByName,
-  filterByEmail,
-  filterByCompany,
-} from "../store/actions";
+import { addUser } from "../store/actions";
 
 export class UserForm extends Component {
-  state = { name: "", email: "", company: "" };
+  state = { name: "", email: "", company: "", filteredUsers: [] };
 
   componentDidMount() {
     this.props.dispatch(fetchUsers());
@@ -27,8 +22,19 @@ export class UserForm extends Component {
     this.setState({ name: "", email: "", company: "" });
   };
 
+  handleFilter = (event) => {
+    const fieldName = event.target.name;
+    const value = event.target.value.toLowerCase();
+    const { users } = this.props;
+    const filtered = users.filter((user) => {
+      return user[fieldName].toLowerCase().includes(value);
+    });
+    this.setState({ filteredUsers: filtered });
+  };
+
   render() {
     const { error, pending, users } = this.props;
+    const { filteredUsers } = this.state;
     if (error) {
       return <div>Error! {error.message}</div>;
     }
@@ -44,27 +50,31 @@ export class UserForm extends Component {
             name="name"
             placeholder="By name..."
             className="userForm__field"
-            onChange={this.filterByName.bind(this)}
+            onKeyUp={this.handleFilter.bind(this)}
           ></input>
           <input
             type="text"
             name="email"
             placeholder="By email..."
             className="userForm__field"
-            onChange={this.filterByEmail.bind(this)}
+            onKeyUp={this.handleFilter.bind(this)}
           ></input>
           <input
             type="text"
             name="company"
             placeholder="By company..."
             className="userForm__field"
-            onChange={this.filterByCompany.bind(this)}
+            onKeyUp={this.handleFilter.bind(this)}
           ></input>
         </form>
         <section className="userCard__container">
-          {users.map((user) => {
-            return <UserCard key={user.name} {...user} />;
-          })}
+          {filteredUsers.length === 0
+            ? users.map((user) => {
+                return <UserCard key={user.name} {...user} />;
+              })
+            : filteredUsers.map((user, index) => {
+                return <UserCard key={index} {...user} />;
+              })}
         </section>
         <form
           className="userForm__form"
