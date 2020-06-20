@@ -27,21 +27,6 @@ export class UserForm extends Component {
     this.setState({ name: "", email: "", company: "" });
   };
 
-  filterByName = (event) => {
-    const input = event.target.value;
-    this.props.dispatch(filterByName(input));
-  };
-
-  filterByEmail = (event) => {
-    const input = event.target.value;
-    this.props.dispatch(filterByEmail(input));
-  };
-
-  filterByCompany = (event) => {
-    const input = event.target.value;
-    this.props.dispatch(filterByCompany(input));
-  };
-
   render() {
     const { error, pending, users } = this.props;
     if (error) {
