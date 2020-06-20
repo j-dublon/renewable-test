@@ -31,7 +31,7 @@ export class UserForm extends Component {
     });
     this.setState({ filteredUsers: filtered });
   };
-
+  
   render() {
     const { error, pending, users } = this.props;
     const { filteredUsers } = this.state;
