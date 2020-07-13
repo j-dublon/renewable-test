@@ -3,11 +3,12 @@ import {
   fetchUsersSuccess,
   fetchUsersError,
 } from "./actions";
+const config = require("../config.json");
 
 export function fetchUsers() {
   return (dispatch) => {
     dispatch(fetchUsersPending());
-    return fetch("https://renewable.exchange/test/users.json")
+    return fetch(`${config.api.invokeUrl}/users`)
       .then((res) => res.json())
       .then((json) => {
         if (json.error) {
