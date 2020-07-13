@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchUsers } from "../store/fetchUsers";
+import * as api from "../store/api";
 import UserCard from "./UserCard";
 import { addUser } from "../store/actions";
 
@@ -8,7 +8,7 @@ export class UserForm extends Component {
   state = { name: "", email: "", company: "", filteredUsers: [] };
 
   componentDidMount() {
-    this.props.dispatch(fetchUsers());
+    this.props.dispatch(api.fetchUsers());
   }
 
   handleChange = (event) => {
@@ -19,6 +19,10 @@ export class UserForm extends Component {
   handleAddSubmit = (event) => {
     event.preventDefault();
     this.props.addUser(this.state);
+    // const id = this.props.users.length;
+    // const { name, email, company } = this.state;
+    // const params = { id, name, email, company };
+    // api.addUser(id, params);
     this.setState({ name: "", email: "", company: "", filteredUsers: [] });
   };
 

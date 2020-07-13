@@ -18,15 +18,9 @@ export function fetchUsers() {
       .catch((error) => {
         dispatch(fetchUsersError(error));
       });
-    // .then((json) => {
-    //   if (json.error) {
-    //     throw json.error;
-    //   }
-    //   dispatch(fetchUsersSuccess(json));
-    //   return json;
-    // })
-    // .catch((error) => {
-    //   dispatch(fetchUsersError(error));
-    // });
   };
 }
+
+// export function addUser(id, params) {
+//   return axios.post(`${config.api.invokeUrl}/${id}`, params);
+// }
